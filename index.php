@@ -1,20 +1,22 @@
 <?php
 // =========================================
-// Actividad Formativa 2
-// Aplicación Simple en PHP - Gestión de Estudiantes
+// Actividad Formativa 3 - Herencia
+// Aplicación en PHP - Gestión de Estudiantes
 // Autora: Reyna Yamileth Perez Martinez
 // =========================================
 
-// Definición de la clase Estudiante
+// ==========================
+// CLASE BASE
+// ==========================
 class Estudiante {
 
-    // Atributos privados (Encapsulamiento)
-    private $nombre;
-    private $matricula;
-    private $carrera;
-    private $promedio;
+    // Atributos protegidos para permitir herencia
+    protected $nombre;
+    protected $matricula;
+    protected $carrera;
+    protected $promedio;
 
-    // Constructor: Inicializa los atributos
+    // Constructor
     public function __construct($nombre, $matricula, $carrera, $promedio) {
         $this->nombre = $nombre;
         $this->matricula = $matricula;
@@ -22,42 +24,91 @@ class Estudiante {
         $this->promedio = $promedio;
     }
 
-    // Método para mostrar la información del estudiante
+    // Método base
     public function mostrarInformacion() {
         echo "<h3>Información del Estudiante</h3>";
         echo "Nombre: " . $this->nombre . "<br>";
         echo "Matrícula: " . $this->matricula . "<br>";
         echo "Carrera: " . $this->carrera . "<br>";
-        echo "Promedio: " . $this->promedio . "<br><br>";
+        echo "Promedio: " . $this->promedio . "<br>";
     }
 
-    // Método para actualizar el promedio
+    // Método para actualizar promedio
     public function actualizarPromedio($nuevoPromedio) {
         $this->promedio = $nuevoPromedio;
     }
 }
 
 // ==========================
-// Programa Principal
+// CLASE DERIVADA 1
+// ==========================
+class EstudianteLicenciatura extends Estudiante {
+
+    private $semestre;
+
+    public function __construct($nombre, $matricula, $carrera, $promedio, $semestre) {
+        parent::__construct($nombre, $matricula, $carrera, $promedio);
+        $this->semestre = $semestre;
+    }
+
+    // Sobrescritura del método
+    public function mostrarInformacion() {
+        parent::mostrarInformacion();
+        echo "Semestre: " . $this->semestre . "<br><br>";
+    }
+}
+
+// ==========================
+// CLASE DERIVADA 2
+// ==========================
+class EstudiantePosgrado extends Estudiante {
+
+    private $grado;
+
+    public function __construct($nombre, $matricula, $carrera, $promedio, $grado) {
+        parent::__construct($nombre, $matricula, $carrera, $promedio);
+        $this->grado = $grado;
+    }
+
+    // Sobrescritura
+    public function mostrarInformacion() {
+        parent::mostrarInformacion();
+        echo "Grado: " . $this->grado . "<br><br>";
+    }
+}
+
+// ==========================
+// PROGRAMA PRINCIPAL
 // ==========================
 
-// Instanciación del objeto
-$estudiante1 = new Estudiante(
+// Objeto Licenciatura
+$est1 = new EstudianteLicenciatura(
     "Reyna Yamileth Perez Martinez",
     "A001",
     "Ingeniería en Sistemas",
-    8.5
+    8.5,
+    5
 );
 
-// Mostrar información inicial
-$estudiante1->mostrarInformacion();
+// Objeto Posgrado
+$est2 = new EstudiantePosgrado(
+    "Carlos López",
+    "P002",
+    "Maestría en TI",
+    9.0,
+    "Maestría"
+);
 
+// Mostrar información
+echo "<h2>=== Estudiante Licenciatura ===</h2>";
+$est1->mostrarInformacion();
+
+echo "<h2>=== Estudiante Posgrado ===</h2>";
+$est2->mostrarInformacion();
+
+// Actualización de promedio
 echo "<strong>Actualizando promedio...</strong><br><br>";
-
-// Actualizar promedio
-$estudiante1->actualizarPromedio(9.2);
-
-// Mostrar información actualizada
-$estudiante1->mostrarInformacion();
+$est1->actualizarPromedio(9.3);
+$est1->mostrarInformacion();
 
 ?>
