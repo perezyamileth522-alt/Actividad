@@ -44,7 +44,7 @@ Producto p2 = new Alimento(...);
 *Herramientas utilizadas
 
 * Lenguaje de programación: Java
-* Entorno de desarrollo: IntelliJ IDEA, Eclipse o NetBeans
+* Entorno de desarrollo: IntelliJ IDEA
 * Sistema de control de versiones: Git
 * Plataforma de almacenamiento: GitHub
 
